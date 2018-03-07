@@ -483,4 +483,27 @@ class CognitoClient
 
         throw new Exception('Could not handle AdminInitiateAuth response');
     }
+    
+    
+     /**Get Custom attributes
+     * @param array $accessToken
+     * @return array
+     * @throws Exception
+     * Added by : parakrama
+     */
+
+    public function getUserInfo($accessToken){
+
+        if (isset($accessToken)) {
+            $response = $this->client->getUser([
+                'AccessToken' => $accessToken, // REQUIRED
+            ]);
+                return $response['UserAttributes'];
+         }
+
+         throw new Exception('Could not handle request');
+
+    }
+    
+    
 }
